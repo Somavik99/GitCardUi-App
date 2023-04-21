@@ -1,17 +1,15 @@
-import React from 'react'
 
-import './App.css'
+import "./App.css";
+import Details from "./Components/Detals/Details";
 
 function App() {
-
-
   return (
     <>
-      <div className='App'>
-        <h1>Hello</h1>
-       </div>
+      <div className="App">
+        <Details />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
