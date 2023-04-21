@@ -1,55 +1,53 @@
 import {
   Card,
-  CardHeader,
-  Avatar,
-  Box,
-  Flex,
+  Stack,
   Heading,
   Text,
   Button,
   Image,
   CardBody,
   CardFooter,
-  IconButton,
+  Divider,
+  ButtonGroup,
 } from "@chakra-ui/react";
-import { RxDotsHorizontal } from "react-icons/rx";
-import  "./CardGit.css";
 
-const CardGit = ({ image, UserName, repos, gists }) => {
+import "./CardGit.css";
+
+const CardGit = ({ data }) => {
+
   return (
-    <Card maxW="md">
-      <CardHeader>
-        <Flex spacing="4">
-          <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name={UserName} src={image} />
-
-            <Box>
-              <Heading size="sm">Segun Adebayo</Heading>
-              <Text>{gists}</Text>
-            </Box>
-          </Flex>
-          <IconButton
-            variant="ghost"
-            colorScheme="gray"
-            aria-label="See menu"
-            icon={<RxDotsHorizontal />}
-          />
-        </Flex>
-      </CardHeader>
+    <Card maxW="sm" className="Card" style={{ width: "fit-content" }}>
       <CardBody>
-        <Text>{repos}</Text>
-      </CardBody>
-      {/* <Image objectFit="cover" src={image} alt="Avatar" /> */}
 
-      <CardFooter
-        justify="space-between"
-        flexWrap="wrap"
-        sx={{
-          "& > button": {
-            minW: "136px",
-          },
-        }}
-      ></CardFooter>
+        <Image
+          src={data.avatar_url}
+          alt={data.login}
+          borderRadius="lg"
+        />
+        <Stack mt="6" spacing="3">
+        <h1>Name</h1>
+<Text>{data.login}</Text>
+          <Heading size="md">Followers</Heading>
+          <Text>
+           {data.followers}
+          </Text>
+        <h3> Repositories:</h3> <Text color="blue.600" fontSize="2xl">
+          {data.public_repos}
+          </Text>
+          <h3> Profile Created On:</h3> <Text color="blue.600" fontSize="2xl">
+   {data.updated_at}
+          </Text>
+        </Stack>
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        <ButtonGroup spacing="2">
+          <Button variant="solid" colorScheme="blue">
+       Leave a Like
+          </Button>
+
+        </ButtonGroup>
+      </CardFooter>
     </Card>
   );
 };

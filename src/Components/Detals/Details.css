@@ -1,0 +1,27 @@
+.Card_Container {
+  gap: 6px;
+  margin-left: 39.5%;
+  display: grid;
+  justify-self: center;
+  align-items: center;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  margin-top: -8em;
+}
+
+#w{
+  width: 15em;
+  height: 2.rem;
+  margin-right: 7px;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px solid rgb(124, 1, 124);
+  outline: none ;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 8%;
+
+}

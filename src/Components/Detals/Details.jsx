@@ -1,40 +1,52 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CardGit from "../Cards/CardGit";
+import "./Details.css";
+import { Button } from "@chakra-ui/react";
 
 const Details = () => {
-  const [ViewDetails, setViewDetails] = useState([]);
+  const [SearchInput, setSearchInput] = useState("");
+  const [data, setData] = useState({});
 
-  const HomePage = async () => {
-    await axios
-      .get("https://api.github.com/users")
-      .then((res) => {
-        console.log(res.data);
-        setViewDetails(res.data);
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    fetch(`https://api.github.com/users/${SearchInput}`)
+      .then((response) => {
+        console.log(response);
+        return response.json();
       })
-      .catch((err) => {
-        console.log(err);
+      .then((value) => {
+        console.log(value);
+        setData(value);
       });
   };
 
-  useEffect(() => {
-    HomePage();
-  }, []);
+  const SearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
 
   return (
-    <div>
-      {ViewDetails.map((user, index) => {
-        return (
-          <CardGit
-            key={index}
-            image={user.avatar_url}
-            UserName={user.login}
-            repos={user.repos_url}
-            gists={user.gists_url}
+    <form onSubmit={onSubmitHandler}>
+      <header className="header">
+        <h1 style={{ fontWeight: "bolder", fontSize: "30px" }}>
+          Search GitCard
+        </h1>
+        <p>
+          <input
+            type="text"
+            placeholder="Github username"
+            value={SearchInput}
+            id="w"
+            onChange={SearchInputChange}
           />
-        );
-      })}
-    </div>
+          <Button type="submit">Search</Button>
+        </p>
+      </header>
+      {setSearchInput ?<> (
+        <div className="Card_Container">
+          <CardGit data={data} />
+        </div>)
+      </> : ""}
+    </form>
   );
 };
 
